@@ -23,12 +23,12 @@ public:
         }
     }
 
-    void creat();
+    void create();
     void display();
     void minCost(int a, int b);
 };
 
-void graph::creat() {
+void graph::create() {
     for (int i = 0; i < n; i++) {
         cout << "\nEnter name of " << (i + 1) << "th office: ";
         cin >> str[i];
@@ -37,7 +37,7 @@ void graph::creat() {
             continue;
         } else {
             int j = i - 1;
-            for (; j != -1; j--) {
+            for (; j >= 0; j--) {
                 cout << "Enter cost to connect " << str[i] << " office to " << str[j] << " office: ";
                 cin >> mat[i][j];
 
@@ -57,7 +57,7 @@ void graph::display() {
     }
     cout << "\n";
     for (int i = 0; i < n; i++) {
-        cout << i << ") " << left << setw(10) << str[i];
+        cout << (i + 1) << ") " << left << setw(10) << str[i];
         for (int j = 0; j < n; j++) {
             cout << left << setw(10) << mat[i][j];
         }
@@ -68,7 +68,7 @@ void graph::display() {
 
 void graph::minCost(int a, int b) {
     int vistd[n];
-    int count = n;
+    int count = n - 1;
     int len[n];
 
     for (int i = 0; i < n; i++) {
@@ -86,7 +86,7 @@ void graph::minCost(int a, int b) {
         }
     }
 
-    while (count >= 0) {
+    while (count > 0) {
         int min = inf;
         int p = 0;
 
@@ -134,7 +134,7 @@ int main() {
         switch (ch) {
             case 1:
                 cout << "\nNow, Creating a network to connect your offices: " << endl;
-                telNet.creat();
+                telNet.create();
                 break;
             case 2:
                 cout << "\nConnection cost for different connections is as follows: " << endl;
@@ -147,7 +147,7 @@ int main() {
                 cout << "To: ";
                 cin >> b;
                 cout << endl;
-                telNet.minCost(a, b);
+                telNet.minCost(a - 1, b - 1);
                 break;
             }
             case 4:
